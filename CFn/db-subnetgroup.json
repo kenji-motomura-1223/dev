@@ -13,12 +13,12 @@
                 "SubnetIds": [
                     {
                         "Fn::ImportValue": {
-                            "Fn::Sub": "${VPCNetworkStack}-DBSubnetC"
+                            "Fn::Sub": "${VPCNetworkStack}-DBSubnetA"
                         }
                     },
                     {
                         "Fn::ImportValue": {
-                            "Fn::Sub": "${VPCNetworkStack}-DBSubnetD"
+                            "Fn::Sub": "${VPCNetworkStack}-DBSubnetC"
                         }
                     }
                 ],
