@@ -1,0 +1,47 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Parameters": {
+        "VPCNetworkStack": {
+            "Type": "String"
+        }
+    },
+    "Resources": {
+        "CommonVPCDBSubnetGroup": {
+            "Type": "AWS::RDS::DBSubnetGroup",
+            "Properties": {
+                "DBSubnetGroupDescription": "dbsubne-group",
+                "SubnetIds": [
+                    {
+                        "Fn::ImportValue": {
+                            "Fn::Sub": "${VPCNetworkStack}-CommonDBSubnetC"
+                        }
+                    },
+                    {
+                        "Fn::ImportValue": {
+                            "Fn::Sub": "${VPCNetworkStack}-CommonDBSubnetD"
+                        }
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "Name",
+                        "Value": "dbsubne-group"
+                    }
+                ]
+            }
+        }
+    },
+    "Outputs": {
+        "CommonVOCDBSubnetGroup": {
+            "Description": "VPCDBSubnetGroup",
+            "Value": {
+                "Ref": "VPCDBSubnetGroup"
+            },
+            "Export": {
+                "Name": {
+                    "Fn::Sub": "${AWS::StackName}-VPCDBSubnetGroup"
+                }
+            }
+        }
+    }
+}
